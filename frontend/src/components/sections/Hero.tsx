@@ -1,5 +1,6 @@
 import Button from '../ui/Button'
 import StyleSwitcher from '../ui/StyleSwitcher'
+import TiltCard from '../ui/TiltCard'
 import { useVariant } from '../../context/VariantContext'
 
 export default function Hero() {
@@ -47,25 +48,37 @@ export default function Hero() {
           </div>
         </div>
 
-        <div key={`${variant.id}-visual`} className="relative animate-fade-up lg:col-span-6">
+        <div
+          key={`${variant.id}-visual`}
+          className="relative animate-fade-up lg:col-span-6"
+          style={{ perspective: '1200px' }}
+        >
           <div className="relative mx-auto flex aspect-square w-full max-w-lg items-center justify-center sm:aspect-[4/5]">
             <div className="absolute inset-0 -rotate-2 scale-95 rounded-3xl bg-gradient-to-tr from-primary-fixed-dim/50 via-tertiary-fixed/40 to-surface-container-high blur-xl" />
 
-            <div className="group relative z-10 h-[85%] w-3/5 overflow-hidden rounded-3xl bg-surface-container-lowest shadow-2xl">
+            <TiltCard
+              maxTilt={10}
+              className="relative z-10 h-[85%] w-3/5 overflow-hidden rounded-3xl bg-surface-container-lowest shadow-2xl"
+            >
               <img
                 src={hero.heroImage.src}
                 alt={hero.heroImage.alt}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="h-full w-full object-cover"
+                draggable={false}
               />
-            </div>
+            </TiltCard>
 
-            <div className="group absolute right-0 top-[8%] z-20 h-[65%] w-1/2 overflow-hidden rounded-3xl bg-surface-container-lowest shadow-2xl transition-transform hover:-translate-y-1">
+            <TiltCard
+              maxTilt={16}
+              className="absolute right-0 top-[8%] z-20 h-[65%] w-1/2 overflow-hidden rounded-3xl bg-surface-container-lowest shadow-2xl"
+            >
               <img
                 src={hero.secondaryImage.src}
                 alt={hero.secondaryImage.alt}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="h-full w-full object-cover"
+                draggable={false}
               />
-            </div>
+            </TiltCard>
           </div>
         </div>
       </div>

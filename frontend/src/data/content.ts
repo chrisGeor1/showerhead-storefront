@@ -23,6 +23,97 @@ export const NAV_LINKS: NavLink[] = [
  */
 export const VARIANTS: ProductVariant[] = [
   {
+    id: 'spiral',
+    label: 'Spiral Jet — White/Black',
+    swatch: '#1f2430',
+    productName: 'Spiral Jet Showerhead Attachment',
+    productSummary: 'Spiral-ridged housing, threaded connection, available in white or black.',
+    hero: {
+      eyebrow: 'Spiral-Ridged Design',
+      headline: 'A compact upgrade for your existing shower.',
+      subhead:
+        'A small, threaded spiral-jet nozzle attachment with a ribbed housing, available in white or black. Shown here from our own product photos — not stock imagery.',
+      heroImage: {
+        src: '/images/white-and-black-variants.png',
+        alt: 'Spiral jet showerhead attachment shown in both white and black finishes side by side',
+      },
+      secondaryImage: {
+        src: '/images/spray-demo-action.png',
+        alt: 'The spiral jet nozzle attachment spraying water while held in a hand',
+      },
+    },
+    features: [
+      {
+        id: 'spiral-housing',
+        title: 'Spiral-Ridged Housing',
+        description:
+          'The cylindrical body has a spiral-grooved surface molded into the housing, giving it a distinct ribbed grip and look.',
+        image: '/images/white-studio-shot.png',
+        imageAlt: 'Studio shot of the white spiral-ridged nozzle housing',
+      },
+      {
+        id: 'threaded-connection',
+        title: 'Threaded Attachment',
+        description:
+          'Connects via a threaded end, sized to attach directly to a standard shower arm or hose fitting.',
+        image: '/images/threaded-end-in-hand.png',
+        imageAlt: 'The nozzle held in a hand near a bathroom fixture, showing the threaded connection end',
+      },
+      {
+        id: 'two-finishes',
+        title: 'Two Finish Options',
+        description: 'Available in white or black to match different bathroom fixtures.',
+        image: '/images/white-and-black-variants.png',
+        imageAlt: 'White and black versions of the nozzle shown side by side',
+      },
+    ],
+    gallery: [
+      {
+        id: 'spiral-video',
+        kind: 'video',
+        src: '/video/product-demo-spiral.mp4',
+        poster: '/images/spray-demo-action.png',
+        alt: 'Video demo of the spiral jet nozzle attachment spraying water',
+        caption: 'Product demo — Spiral Jet',
+      },
+      {
+        id: 'spiral-g1',
+        kind: 'image',
+        src: '/images/white-and-black-variants.png',
+        alt: 'White and black versions of the spiral jet nozzle shown side by side',
+        caption: 'White and black finishes',
+      },
+      {
+        id: 'spiral-g2',
+        kind: 'image',
+        src: '/images/white-studio-shot.png',
+        alt: 'Studio shot of the white spiral-ridged nozzle housing',
+        caption: 'White finish, studio view',
+      },
+      {
+        id: 'spiral-g3',
+        kind: 'image',
+        src: '/images/threaded-end-in-hand.png',
+        alt: 'The nozzle held in a hand near a bathroom fixture, showing the threaded connection end and its dimensions',
+        caption: 'Threaded end, in hand',
+      },
+      {
+        id: 'spiral-g4',
+        kind: 'image',
+        src: '/images/spray-demo-action.png',
+        alt: 'The nozzle attachment spraying water in use',
+        caption: 'In use',
+      },
+      {
+        id: 'spiral-g5',
+        kind: 'image',
+        src: '/images/spray-in-hand-both-finishes.png',
+        alt: 'The nozzle attachment spraying water over a hand, with both white and black finishes visible',
+        caption: 'In use, both finishes',
+      },
+    ],
+  },
+  {
     id: 'lattice',
     label: 'Lattice Cage — Blue',
     swatch: '#1d6fe0',
@@ -118,97 +209,6 @@ export const VARIANTS: ProductVariant[] = [
         src: '/images/lattice-mounted.png',
         alt: 'The showerhead held up near a fixed overhead shower fixture',
         caption: 'In the shower',
-      },
-    ],
-  },
-  {
-    id: 'spiral',
-    label: 'Spiral Jet — White/Black',
-    swatch: '#1f2430',
-    productName: 'Spiral Jet Showerhead Attachment',
-    productSummary: 'Spiral-ridged housing, threaded connection, available in white or black.',
-    hero: {
-      eyebrow: 'Spiral-Ridged Design',
-      headline: 'A compact upgrade for your existing shower.',
-      subhead:
-        'A small, threaded spiral-jet nozzle attachment with a ribbed housing, available in white or black. Shown here from our own product photos — not stock imagery.',
-      heroImage: {
-        src: '/images/white-and-black-variants.png',
-        alt: 'Spiral jet showerhead attachment shown in both white and black finishes side by side',
-      },
-      secondaryImage: {
-        src: '/images/spray-demo-action.png',
-        alt: 'The spiral jet nozzle attachment spraying water while held in a hand',
-      },
-    },
-    features: [
-      {
-        id: 'spiral-housing',
-        title: 'Spiral-Ridged Housing',
-        description:
-          'The cylindrical body has a spiral-grooved surface molded into the housing, giving it a distinct ribbed grip and look.',
-        image: '/images/white-studio-shot.png',
-        imageAlt: 'Studio shot of the white spiral-ridged nozzle housing',
-      },
-      {
-        id: 'threaded-connection',
-        title: 'Threaded Attachment',
-        description:
-          'Connects via a threaded end, sized to attach directly to a standard shower arm or hose fitting.',
-        image: '/images/threaded-end-in-hand.png',
-        imageAlt: 'The nozzle held in a hand near a bathroom fixture, showing the threaded connection end',
-      },
-      {
-        id: 'two-finishes',
-        title: 'Two Finish Options',
-        description: 'Available in white or black to match different bathroom fixtures.',
-        image: '/images/white-and-black-variants.png',
-        imageAlt: 'White and black versions of the nozzle shown side by side',
-      },
-    ],
-    gallery: [
-      {
-        id: 'spiral-video',
-        kind: 'video',
-        src: '/video/product-demo-spiral.mp4',
-        poster: '/images/spray-demo-action.png',
-        alt: 'Video demo of the spiral jet nozzle attachment spraying water',
-        caption: 'Product demo — Spiral Jet',
-      },
-      {
-        id: 'spiral-g1',
-        kind: 'image',
-        src: '/images/white-and-black-variants.png',
-        alt: 'White and black versions of the spiral jet nozzle shown side by side',
-        caption: 'White and black finishes',
-      },
-      {
-        id: 'spiral-g2',
-        kind: 'image',
-        src: '/images/white-studio-shot.png',
-        alt: 'Studio shot of the white spiral-ridged nozzle housing',
-        caption: 'White finish, studio view',
-      },
-      {
-        id: 'spiral-g3',
-        kind: 'image',
-        src: '/images/threaded-end-in-hand.png',
-        alt: 'The nozzle held in a hand near a bathroom fixture, showing the threaded connection end and its dimensions',
-        caption: 'Threaded end, in hand',
-      },
-      {
-        id: 'spiral-g4',
-        kind: 'image',
-        src: '/images/spray-demo-action.png',
-        alt: 'The nozzle attachment spraying water in use',
-        caption: 'In use',
-      },
-      {
-        id: 'spiral-g5',
-        kind: 'image',
-        src: '/images/spray-in-hand-both-finishes.png',
-        alt: 'The nozzle attachment spraying water over a hand, with both white and black finishes visible',
-        caption: 'In use, both finishes',
       },
     ],
   },
