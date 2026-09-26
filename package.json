@@ -1,27 +1,23 @@
 {
   "name": "showerhead-storefront",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "0.1.0",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "admin"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "oxlint",
-    "preview": "vite preview"
+    "dev": "npm run dev --workspace=backend & npm run dev --workspace=frontend & npm run dev --workspace=admin & wait",
+    "build": "npm run build --workspace=backend && npm run build --workspace=frontend && npm run build --workspace=admin",
+    "lint": "npm run lint --workspace=backend && npm run lint --workspace=frontend && npm run lint --workspace=admin",
+    "typecheck": "npm run typecheck --workspace=backend && npm run typecheck --workspace=frontend && npm run typecheck --workspace=admin",
+    "test": "npm run test --workspace=backend",
+    "db:migrate": "npm run db:migrate --workspace=backend",
+    "db:seed": "npm run db:seed --workspace=backend",
+    "db:studio": "npm run db:studio --workspace=backend"
   },
-  "dependencies": {
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "@types/node": "^24.13.3",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.7",
-    "@vitejs/plugin-react": "^6.1.1",
-    "oxlint": "^1.81.0",
-    "tailwindcss": "^4.3.3",
-    "typescript": "~6.0.2",
-    "vite": "^8.3.0"
+  "engines": {
+    "node": ">=18.18.0"
   }
 }

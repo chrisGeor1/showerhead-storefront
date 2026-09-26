@@ -12,6 +12,19 @@ dist
 dist-ssr
 *.local
 
+# Env / secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Backend
+backend/uploads
+coverage
+
+# Docker
+docker-compose.override.yml
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

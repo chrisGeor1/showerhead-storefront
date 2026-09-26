@@ -1,0 +1,187 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum MediaKind {
+  IMAGE
+  VIDEO
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  FULFILLED
+  CANCELLED
+}
+
+enum PaymentProvider {
+  MOCK
+  PAYSTACK
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SiteSettings {
+  id             String  @id @default("default")
+  brandName      String  @default("VORTEX")
+  brandTagline   String  @default("Shower Spray Attachments")
+  navLinks       Json    @default("[]")
+  footerLinks    Json    @default("{}")
+  faviconMediaId String?
+  faviconMedia   Media?  @relation(fields: [faviconMediaId], references: [id])
+
+  updatedAt DateTime @updatedAt
+}
+
+model Media {
+  id        String    @id @default(cuid())
+  key       String    @unique
+  url       String
+  mimeType  String
+  kind      MediaKind
+  sizeBytes Int
+  width     Int?
+  height    Int?
+  createdAt DateTime  @default(now())
+
+  heroFor          Variant[]      @relation("HeroImage")
+  heroSecondaryFor Variant[]      @relation("HeroSecondaryImage")
+  features         Feature[]
+  galleryItems     GalleryItem[]  @relation("GalleryMedia")
+  galleryPosters   GalleryItem[]  @relation("GalleryPoster")
+  siteSettings     SiteSettings[]
+
+  @@index([kind])
+}
+
+model Variant {
+  id              String   @id
+  label           String
+  swatch          String
+  productName     String
+  productSummary  String
+  price           Decimal  @db.Decimal(10, 2)
+  currency        String   @default("NGN")
+  active          Boolean  @default(true)
+  sortOrder       Int      @default(0)
+
+  heroEyebrow     String
+  heroHeadline    String
+  heroSubhead     String
+
+  heroImageId          String
+  heroImage            Media  @relation("HeroImage", fields: [heroImageId], references: [id])
+  heroImageAlt         String
+  heroSecondaryImageId String
+  heroSecondaryImage   Media  @relation("HeroSecondaryImage", fields: [heroSecondaryImageId], references: [id])
+  heroSecondaryImageAlt String
+
+  features     Feature[]
+  gallery      GalleryItem[]
+  orderItems   OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([active, sortOrder])
+}
+
+model Feature {
+  id          String  @id @default(cuid())
+  variantId   String
+  variant     Variant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  title       String
+  description String
+  imageId     String
+  image       Media   @relation(fields: [imageId], references: [id])
+  imageAlt    String
+  sortOrder   Int     @default(0)
+
+  @@index([variantId, sortOrder])
+}
+
+model GalleryItem {
+  id             String    @id @default(cuid())
+  variantId      String
+  variant        Variant   @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  kind           MediaKind
+  mediaId        String
+  media          Media     @relation("GalleryMedia", fields: [mediaId], references: [id])
+  posterMediaId  String?
+  posterMedia    Media?    @relation("GalleryPoster", fields: [posterMediaId], references: [id])
+  alt            String
+  caption        String
+  sortOrder      Int       @default(0)
+
+  @@index([variantId, sortOrder])
+}
+
+model FaqItem {
+  id        String @id @default(cuid())
+  question  String
+  answer    String
+  sortOrder Int    @default(0)
+
+  @@index([sortOrder])
+}
+
+model Order {
+  id                String      @id @default(cuid())
+  customerEmail     String
+  customerName      String
+  subtotal          Decimal     @db.Decimal(10, 2)
+  currency          String      @default("NGN")
+  status            OrderStatus @default(PENDING)
+  paystackReference String      @unique
+
+  items   OrderItem[]
+  payment Payment?
+
+  createdAt DateTime  @default(now())
+  paidAt    DateTime?
+
+  @@index([status, createdAt])
+}
+
+model OrderItem {
+  id                String  @id @default(cuid())
+  orderId           String
+  order             Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  variantId         String
+  variant           Variant @relation(fields: [variantId], references: [id])
+  labelSnapshot     String
+  unitPriceSnapshot Decimal @db.Decimal(10, 2)
+  quantity          Int
+  lineTotal         Decimal @db.Decimal(10, 2)
+}
+
+model Payment {
+  id                String          @id @default(cuid())
+  orderId           String          @unique
+  order             Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  provider          PaymentProvider
+  providerRef       String
+  status            PaymentStatus   @default(PENDING)
+  rawWebhookPayload Json?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+}
